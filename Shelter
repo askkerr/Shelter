@@ -1,0 +1,65 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AnimalShelter
+{
+    class Shelter : IEnumerable<Animal>
+    {
+        public List<Animal> Animals;
+        
+        public Shelter()
+        {
+            Animals = new List<Animal>();
+        }
+        public IEnumerator<Animal> GetEnumerator()
+        {
+            return Animals.GetEnumerator();
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)Animals).GetEnumerator();
+        }
+        public void Add(Animal animal)
+        {
+            this.Animals.Add(animal);
+        }
+        public void RemoveByName(string name)
+        {
+            foreach(Animal animal in Animals)
+            {
+                if(animal.Name == name)
+                {
+                    this.Animals.Remove(animal);
+                }
+            }
+        }
+        public void SortBySpecies()
+        {
+            var mySpec = from element in Animals
+                         orderby element.Species
+                         select element;
+        }
+        public void SortByAge()
+        {
+            var myAge = from element in Animals
+                        orderby element.Age
+                        select element;
+        }
+        public void SortBySex()
+        {
+            var mySex = from element in Animals
+                        orderby element.Sex
+                        select element;
+        }
+        public void SortByWeight()
+        {
+            var mySize = from element in Animals
+                         orderby element.Weight
+                         select element;
+        }
+    }
+}
